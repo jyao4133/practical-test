@@ -18,7 +18,8 @@ class testDates(unittest.TestCase):
         secondDate = "22/06/1983"
         expectedNumDays = 19
 
-        self.assertEqual(findDaysElapsed(firstDate, secondDate), 19,
+        self.assertEqual(findDaysElapsed(firstDate,
+                                         secondDate), expectedNumDays,
                          "There should be 19 days between these 2 dates")
 
     def testCase2(self):
@@ -26,7 +27,8 @@ class testDates(unittest.TestCase):
         secondDate = "25/12/1984"
         expectedNumDays = 173
 
-        self.assertEqual(findDaysElapsed(firstDate, secondDate), 173,
+        self.assertEqual(findDaysElapsed(firstDate,
+                                         secondDate), expectedNumDays,
                          "There should be 173 days between these 2 dates")
 
     def testCase3(self):
@@ -34,17 +36,18 @@ class testDates(unittest.TestCase):
         secondDate = "03/08/1983"
         expectedNumDays = 1979
 
-        self.assertEqual(findDaysElapsed(firstDate, secondDate), 1979,
+        self.assertEqual(findDaysElapsed(firstDate,
+                                         secondDate), expectedNumDays,
                          "There should be 1979 days between these 2 dates")
 
     # Test for a leap year
     def testCaseLeapYear(self):
         firstDate = "01/01/2020"
         secondDate = "01/01/2021"
-        expectedNumDays = 19
+        expectedNumDays = 364
 
         self.assertEqual(
-            findDaysElapsed(firstDate, secondDate), 364,
+            findDaysElapsed(firstDate, secondDate), expectedNumDays,
             "There should be 364 days between these 2 dates, as there is a leap year included here"
         )
 
