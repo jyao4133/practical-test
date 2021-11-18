@@ -45,3 +45,15 @@ def findEarliestDate(date1, date2):
 
     else:
         return date2, date1
+
+
+def findLeapYearDays(earlierDate, laterDate):
+    leapDays = 0
+    while (earlierDate != laterDate):
+        if (earlierDate % 4 == 0):
+            leapDays += 1
+        earlierDate += 1
+    if (earlierDate == laterDate):
+        if (earlierDate % 4 == 0):
+            leapDays += 1
+    return leapDays
