@@ -5,11 +5,11 @@ and end date given in the form dd/mm/yyyy.
 
 This calculator will
 
--Only calculate days elapsed if the dates are between 01/01/1901 and 31/12/2999
--Not count partial days
--Allow for command line input of dates
--Validate that the dates coming from command line are in the format and boundaries expected
--Pass the following test cases:
+- Only calculate days elapsed if the dates are between 01/01/1901 and 31/12/2999
+- Not count partial days
+- Allow for command line input of dates
+- Validate that the dates coming from command line are in the format and boundaries expected
+- Pass the following test cases:
 
 1. 02/06/1983 - 22/06/1983: 19 days
 2. 04/07/1984 - 25/12/1984: 173 days
@@ -17,14 +17,14 @@ This calculator will
 
 This calculator will also:
 
--Account for leap years
--Include extra tests for multiple scenarios to validate the functionality of the code
--Include tests that are created before the implementation of the code to validate functionality of the code
--Utilise as little internal/external libraries as possible
-=> The libraries that are currently used are:
-====> "re": For regex matching of the date string
-====> "os": For folder structure and paths
-====> "unittest": For testing the implementation
+- Account for leap years
+- Include extra tests for multiple scenarios to validate the functionality of the code
+- Include tests that are created before the implementation of the code to validate functionality of the code
+- Utilise as little internal/external libraries as possible
+- The libraries that are currently used are:
+- "re": For regex matching of the date string
+- "os": For folder structure and paths
+- "unittest": For testing the implementation
 
 To run the code:
 
