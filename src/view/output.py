@@ -18,19 +18,19 @@ def initialPrint():
 # Prints specific messages depending on the type of message that is necessary
 def logItem(type, item="Nothing"):
     
-    match type:
-        case "Final Answer":
-            print(
-        str(item) +
-        " Days elapsed between the specified dates")
-        case "First Date":
-            print("The 1st date entered was in an invalid format, please try again")
-        case "Second Date":
-            print("The 2nd date entered was in an invalid format, please try again")
-        case "Regex":
-            print("The date format did not match dd/mm/yyyy, please try again")
-        case "Date Month":
-            print("The date had an invalid month or day, please try again")
-        case "Year":
-            print("The year given was not a valid year, please try again")
-            
+    
+    if(type == "Final Answer"):
+        print(
+    str(item) +
+    " Days elapsed between the specified dates")
+    elif(type =="First Date"):
+        print("The 1st date entered was in an invalid format, please try again")
+    elif(type =="Second Date"):
+        print("The 2nd date entered was in an invalid format, please try again")
+    elif(type == "Regex"):
+        print("The date format did not match dd/mm/yyyy, please try again")
+    elif(type =="Date Month"):
+        print("The date had an invalid month or day, please try again")
+    elif(type =="Year"):
+        print("The year given was not a valid year, please try again")
+        
