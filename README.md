@@ -3,6 +3,8 @@
 A date difference calculator to calculate the number of full days elapsed between a start
 and end date given in the form dd/mm/yyyy.
 
+Written in Python 3.10.0
+
 This calculator will
 
 - Only calculate days elapsed if the dates are between 01/01/1901 and 31/12/2999
@@ -43,6 +45,7 @@ To test the code:
 
 This code follows a pseudo-MVC style architecture where there is a controller(main), model and view to seperate information in the code.
 
+```
 practical-test
 |-src
     |-model
@@ -55,7 +58,7 @@ practical-test
         |-mainTest.py
     |-main.py
 |-README.md
-
+```
 
 
 
