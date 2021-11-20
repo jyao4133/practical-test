@@ -23,18 +23,40 @@ This calculator will also:
 - Utilise as little internal/external libraries as possible
 - The libraries that are currently used are:
 - "re": For regex matching of the date string
-- "os": For folder structure and paths
+- "os" & "sys": For folder structure and paths
 - "unittest": For testing the implementation
 
 To run the code:
 
 1. Go to the root directory of the folder "./practical-test"
-2. Run the command "python .\main.py"
+2. Run the command "python .\src\main.py" or if you're using an IDE, open the main.py file in ./src and run it using the IDE
 3. Type in the 2 dates that you'd like to try in the command line
 4. The days elapsed between the 2 dates will show in the command line interface
 
 To test the code:
 
 1. Go to the root directory of the folder "./practical-test"
-2. Run the command "python .\mainTest.py -b"
+2. Run the command "python .\src\tests\mainTest.py" or if you're using an IDE, open the mainTest.py file in ./src/tests and run it using the IDE
 3. OK will be printed if all tests pass, and the number of tests run will be printed too
+
+# Folder structure:
+
+This code follows a pseudo-MVC style architecture where there is a controller(main), model and view to seperate information in the code.
+
+practical-test
+|-src
+    |-model
+        |-utilities
+            |-utilities.py
+        |-calculator.py
+    |-view
+        |-output.py
+    |-tests
+        |-mainTest.py
+    |-main.py
+|-README.md
+
+
+
+
+

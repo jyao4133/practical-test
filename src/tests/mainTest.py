@@ -2,12 +2,12 @@
 Tests the functionality of the logic to find the number of days elapsed between 2 given
 dates in main.py
 
+Also tests error handling
+
 Author: Jason Yao
 Date: 18/11/2021
 """
 import unittest
-from main import findDaysElapsed
-from utilities.utilities import checkDate
 
 
 class testDates(unittest.TestCase):
@@ -68,6 +68,16 @@ class testDates(unittest.TestCase):
             findDaysElapsed(firstDate, secondDate), expectedNumDays,
             "There should be 365 days between these 2 dates (1 year)")
 
+    def testCase7(self):
+        firstDate = "20/12/2021"
+        secondDate = "19/12/2021"
+        expectedNumDays = 0
+
+        self.assertEqual(
+            findDaysElapsed(firstDate, secondDate), expectedNumDays,
+            "There should be 0 days between these 2 dates (This is testing for a date difference of < 1 days)"
+        )
+
     def testCaseLargeRange(self):
         firstDate = "01/01/1901"
         secondDate = "31/12/2010"
@@ -86,6 +96,17 @@ class testDates(unittest.TestCase):
         self.assertEqual(
             findDaysElapsed(firstDate, secondDate), expectedNumDays,
             "There should be 365 days between these 2 dates, as there is a leap year included here"
+        )
+
+    # Test for a leap year day to another leap year day
+    def testCaseLeapToLeapYear(self):
+        firstDate = "29/02/2004"
+        secondDate = "29/02/2008"
+        expectedNumDays = 1460
+
+        self.assertEqual(
+            findDaysElapsed(firstDate, secondDate), expectedNumDays,
+            "There should be 1460 days between these 2 dates, as they are both leap year days on the 29th of Feb"
         )
 
     # Test for a missed leap year
@@ -108,44 +129,69 @@ class testErrorChecking(unittest.TestCase):
 
         date = "21/01/3001"
 
-        self.assertEqual(checkDate(date), False,
-                         "Should be false as year is over 2999")
+        self.assertEqual(
+            checkDate(date)[0], False, "Should be false as year is over 2999")
 
     def testInvalidDateYear2(self):
 
         date = "21/01/1900"
 
-        self.assertEqual(checkDate(date), False,
-                         "Should be false as year is under 1901")
+        self.assertEqual(
+            checkDate(date)[0], False, "Should be false as year is under 1901")
 
     def testInvalidDateDay1(self):
 
         date = "32/01/1950"
 
-        self.assertEqual(checkDate(date), False,
-                         "Should be false as the date is 32nd")
+        self.assertEqual(
+            checkDate(date)[0], False, "Should be false as the date is 32nd")
 
     def testInvalidDateDay2(self):
 
         date = "00/01/1950"
 
-        self.assertEqual(checkDate(date), False,
-                         "Should be false as the date is the 0th")
+        self.assertEqual(
+            checkDate(date)[0], False,
+            "Should be false as the date is the 0th")
+        
+    def testInvalidDateMonth1(self):
 
+        date = "01/00/1950"
+
+        self.assertEqual(
+            checkDate(date)[0], False,
+            "Should be false as the month is the 0th")
+        
+    def testInvalidDateMonth2(self):
+
+        date = "01/13/1950"
+
+        self.assertEqual(
+            checkDate(date)[0], False,
+            "Should be false as the month is the 13th")
+        
     def testInvalidDateNonLeap(self):
 
         date = "29/02/2001"
 
-        self.assertEqual(checkDate(date), False,
-                         "Should be false as 2001 is not a leap year")
+        self.assertEqual(
+            checkDate(date)[0], False,
+            "Should be false as 2001 is not a leap year")
 
     def testDateLeapYear(self):
 
         date = "29/02/2000"
 
-        self.assertEqual(checkDate(date), True,
-                         "Should be true as 2000 is a leap year")
+        self.assertEqual(
+            checkDate(date)[0], True, "Should be true as 2000 is a leap year")
 
 
 if __name__ == "__main__":
+
+    import sys
+    import os
+    sys.path.append(os.getcwd())
+    from src.main import findDaysElapsed
+    from src.model.utilities.utilities import checkDate
+
     unittest.main()
