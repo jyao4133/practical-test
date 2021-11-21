@@ -1,4 +1,4 @@
-# Date difference calculator
+# Date difference calculator - Method 2
 
 A date difference calculator to calculate the number of full days elapsed between a start
 and end date given in the form dd/mm/yyyy.
@@ -59,7 +59,3 @@ practical-test
     |-main.py
 |-README.md
 ```
-
-
-
-
