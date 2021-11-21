@@ -23,6 +23,36 @@ daysInMonths = {
 }
 
 
+# Alternative code to check days elapsed between 2 dates
+def countDaysElapsed(firstDate, secondDate):
+    daysElapsed = 0
+    # Assume leap years will be handled by leap year calculation function findLeapYearDays
+    if (firstDate[0] == 29 and firstDate[1] == 2):
+        firstDate[0] = 28
+
+    if (secondDate[0] == 29 and secondDate[1] == 2):
+        secondDate[0] = 28
+
+    # While the dates aren't equal, count the days
+    while ((firstDate[0] != secondDate[0]) or (firstDate[1] != secondDate[1])
+           or (firstDate[2] != secondDate[2])):
+        # Increment days elapsed
+        daysElapsed += 1
+        firstDate[0] += 1
+        # Check if the days have overflowed its limits for current month
+        if (firstDate[0] > daysInMonths[firstDate[1]]):
+            # Reset days and increment month
+            firstDate[0] = 1
+            firstDate[1] += 1
+            # Check if the months have overflowed for the current year
+            if (firstDate[1] > 12):
+                # Reset month and increment year
+                firstDate[1] = 1
+                firstDate[2] += 1
+
+    return daysElapsed
+
+
 # Checks that the year is between 1901 and 2999
 def checkYear(date):
     currentYear = date[2]  # The current year of the date as a num
@@ -120,40 +150,6 @@ def findLeapYearDays(earlierDate, laterDate, earliestDateYears,
                 or (laterDateMonths == 2 and laterDateDays <= 29)):
             leapDays -= 1
     return leapDays
-
-
-# Returns the number of days elapsed due to years
-def calculateYears(overAYear, daysElapsed, yearDifference, monthDifference,
-                   dayDifference):
-    if (overAYear):
-        daysElapsed += 365 * yearDifference
-    elif (not overAYear and monthDifference == 0 and dayDifference > 0):
-        daysElapsed += 365 * yearDifference
-    else:
-        daysElapsed += 365 * (yearDifference - 1)
-
-    return daysElapsed
-
-
-# Returns the number of days elapsed due to months
-def calculateMonths(earliestDateMonths, laterDateMonths, earliestDateDays,
-                    daysElapsed):
-    firstIteration = True
-
-    while (earliestDateMonths != laterDateMonths):
-        # Adds days in month - the current earliest date day if we're in our first iteration
-        if (firstIteration):
-            daysElapsed += (daysInMonths[earliestDateMonths] -
-                            earliestDateDays)
-            firstIteration = False
-        # Add the days from each month (Excluding leap years) and iterate the current month
-        else:
-            daysElapsed += daysInMonths[earliestDateMonths]
-        earliestDateMonths += 1
-        # Reset month iterator if we roll over from December to January
-        if (earliestDateMonths == 13):
-            earliestDateMonths = 1
-    return daysElapsed
 
 
 # Matches the regex string for the date entered. It must be in the format dd/mm/yyyy

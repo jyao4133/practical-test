@@ -5,9 +5,8 @@ Author: Jason Yao
 Date: 20/11/2021
 '''
 
-from src.model.utilities.utilities import (splitDateString, findEarliestDate,
-                                           findLeapYearDays, calculateMonths,
-                                           calculateYears)
+from src.model.utilities.utilities import (countDaysElapsed, splitDateString,
+                                           findEarliestDate, findLeapYearDays)
 
 
 # Finds the number of days elapsed between 2 given dates
@@ -29,8 +28,6 @@ def findDaysElapsed(firstDate, secondDate):
     laterDateDays = laterDate[0]
     laterDateMonths = laterDate[1]
     laterDateYears = laterDate[2]
-
-    yearDifference = laterDateYears - earliestDateYears
     daysElapsed = 0
 
     # Find the number of leap days that occur in the period specified
@@ -39,31 +36,7 @@ def findDaysElapsed(firstDate, secondDate):
                                     laterDateYears, laterDateMonths,
                                     laterDateDays)
 
-    # If both months are equal, ie both May or August
-    if (laterDateMonths == earliestDateMonths):
-        daysElapsed += (laterDateDays - earliestDateDays)
-    # Add the final months number of elapsed days if the months aren't equal
-    else:
-        daysElapsed += laterDateDays
-
-    # Loop through the months and add all days together
-    daysElapsed = calculateMonths(earliestDateMonths, laterDateMonths,
-                                  earliestDateDays, daysElapsed)
-
-    # Handle days elapsed during a year if more than a year has been elapsed since earliest date
-    monthDifference = earliestDateMonths - laterDateMonths
-    dayDifference = earliestDateDays - laterDateDays
-    overAYear = False
-    # monthDifference < 0 checks if there's more than a year elapsed
-    # monthDifference == 0 and dayDifference < 0 if there's more than a year elapsed
-    if (monthDifference < 0 or (monthDifference == 0 and dayDifference < 0)):
-        overAYear = True
-    elif (dayDifference == 0 and monthDifference == 0):
-        overAYear = True
-
-    # Adds days depending on the amount of years elapsed
-    daysElapsed = calculateYears(overAYear, daysElapsed, yearDifference,
-                                 monthDifference, dayDifference)
+    daysElapsed = countDaysElapsed(earliestDate, laterDate)
 
     # If we have a date 1 day from eachother, we want to not count them as they're partial
     if (daysElapsed == 1 or daysElapsed == 0):
